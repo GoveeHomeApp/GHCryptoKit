@@ -7,11 +7,19 @@
 //
 
 import UIKit
+import GHCryptoKit
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let pubKey = "";
+        let signa = "";
+        let msg = ""
+        
+        let isValid = GHCryptoKitManager.instance.verifyP256_ECDSA(pubKeyBase64: pubKey, signatureBase64: signa, msg: msg)
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 

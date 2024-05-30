@@ -9,20 +9,23 @@ import Foundation
 import CryptoKit
 
 public protocol EncryptProtocol {
-    func encode256(pubKeyBase64: String, signatureBase64: String, msg: String)
+    func verify256(pubKeyBase64: String, signatureBase64: String, msg: String) -> Bool
+    func verify384(pubKeyBase64: String, signatureBase64: String, msg: String) -> Bool
+    func verify521(pubKeyBase64: String, signatureBase64: String, msg: String) -> Bool
 }
 
 public extension EncryptProtocol {
     
-    func encode256(pubKeyBase64: String, signatureBase64: String, msg: String) {
-        
-        guard let pubData = Data(base64Encoded: pubKeyBase64), let signatureData = Data(base64Encoded: signatureBase64) else { return }
+    func verify256(pubKeyBase64: String, signatureBase64: String, msg: String) -> Bool {
+        var isValid = false
+        guard let pubData = Data(base64Encoded: pubKeyBase64), let signatureData = Data(base64Encoded: signatureBase64) else { return false }
         
         let publicKey: P256.Signing.PublicKey
         do {
             publicKey = try P256.Signing.PublicKey(rawRepresentation: pubData)
         } catch {
-            fatalError("Failed to create public key: \(error)")
+            print("P256 ECDSA Failed to create public key: \(error)")
+            return false
         }
 
         // Convert the signature data to CryptoKit signature
@@ -30,17 +33,70 @@ public extension EncryptProtocol {
         do {
             signature = try P256.Signing.ECDSASignature(derRepresentation: signatureData)
         } catch {
-            fatalError("Failed to create signature: \(error)")
+            print("P256 ECDSA Failed to create signature: \(error)")
+            return false
         }
         
-        let isValid = publicKey.isValidSignature(signature, for: msg.data(using: .utf8)!)
-        print("Signature is valid: \(isValid)")
-        
+        isValid = publicKey.isValidSignature(signature, for: msg.data(using: .utf8)!)
+        print("P256 ECDSA Signature is valid: \(isValid)")
+        return isValid
     }
+    
+    func verify384(pubKeyBase64: String, signatureBase64: String, msg: String) -> Bool {
+        var isValid = false
+        guard let pubData = Data(base64Encoded: pubKeyBase64), let signatureData = Data(base64Encoded: signatureBase64) else { return false }
+        
+        let publicKey: P384.Signing.PublicKey
+        do {
+            publicKey = try P384.Signing.PublicKey(rawRepresentation: pubData)
+        } catch {
+            print("P384 ECDSA Failed to create public key: \(error)")
+            return false
+        }
+
+        // Convert the signature data to CryptoKit signature
+        let signature: P384.Signing.ECDSASignature
+        do {
+            signature = try P384.Signing.ECDSASignature(derRepresentation: signatureData)
+        } catch {
+            print("P384 ECDSA Failed to create signature: \(error)")
+            return false
+        }
+        
+        isValid = publicKey.isValidSignature(signature, for: msg.data(using: .utf8)!)
+        print("P384 ECDSA Signature is valid: \(isValid)")
+        return isValid
+    }
+    
+    func verify521(pubKeyBase64: String, signatureBase64: String, msg: String) -> Bool {
+        var isValid = false
+        guard let pubData = Data(base64Encoded: pubKeyBase64), let signatureData = Data(base64Encoded: signatureBase64) else { return false }
+        
+        let publicKey: P521.Signing.PublicKey
+        do {
+            publicKey = try P521.Signing.PublicKey(rawRepresentation: pubData)
+        } catch {
+            print("P521 ECDSA Failed to create public key: \(error)")
+            return false
+        }
+
+        // Convert the signature data to CryptoKit signature
+        let signature: P521.Signing.ECDSASignature
+        do {
+            signature = try P521.Signing.ECDSASignature(derRepresentation: signatureData)
+        } catch {
+            print("P521 ECDSA Failed to create signature: \(error)")
+            return false
+        }
+        
+        isValid = publicKey.isValidSignature(signature, for: msg.data(using: .utf8)!)
+        print("P521 ECDSA Signature is valid: \(isValid)")
+        return isValid
+    }
+    
 }
 
 @objc open class GHCryptoKitManager: NSObject {
-    
     /// 单例
     @objc public private(set) static var instance = GHCryptoKitManager()
     
@@ -48,8 +104,16 @@ public extension EncryptProtocol {
 
 extension GHCryptoKitManager: EncryptProtocol {
     
-    @objc public func encode256(pubKeyBase64: String, signatureBase64: String, msg: String) {
-        encode256(pubKeyBase64: pubKeyBase64, signatureBase64: signatureBase64, msg: msg)
+    @objc public func verifyP256_ECDSA(pubKeyBase64: String, signatureBase64: String, msg: String) -> Bool {
+        return verify256(pubKeyBase64: pubKeyBase64, signatureBase64: signatureBase64, msg: msg)
+    }
+    
+    @objc public func verifyP384_ECDSA(pubKeyBase64: String, signatureBase64: String, msg: String) -> Bool {
+        return verify384(pubKeyBase64: pubKeyBase64, signatureBase64: signatureBase64, msg: msg)
+    }
+    
+    @objc public func verifyP521_ECDSA(pubKeyBase64: String, signatureBase64: String, msg: String) -> Bool {
+        return verify521(pubKeyBase64: pubKeyBase64, signatureBase64: signatureBase64, msg: msg)
     }
     
 }
