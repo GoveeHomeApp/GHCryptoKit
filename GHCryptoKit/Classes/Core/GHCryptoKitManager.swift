@@ -18,11 +18,16 @@ public extension EncryptProtocol {
     
     func verify256(pubKeyBase64: String, signatureBase64: String, msg: String) -> Bool {
         var isValid = false
-        guard let pubData = Data(base64Encoded: pubKeyBase64), let signatureData = Data(base64Encoded: signatureBase64) else { return false }
+        guard let pubData = Data(base64Encoded: pubKeyBase64, options: .ignoreUnknownCharacters), let signatureData = Data(base64Encoded: signatureBase64, options: .ignoreUnknownCharacters) else { return false }
         
         let publicKey: P256.Signing.PublicKey
         do {
-            publicKey = try P256.Signing.PublicKey(rawRepresentation: pubData)
+            if #available(iOS 14.0, *) {
+                publicKey = try P256.Signing.PublicKey(derRepresentation: pubData)
+            } else {
+                // Fallback on earlier versions
+                publicKey = try P256.Signing.PublicKey(rawRepresentation: pubData)
+            }
         } catch {
             print("P256 ECDSA Failed to create public key: \(error)")
             return false
@@ -36,19 +41,25 @@ public extension EncryptProtocol {
             print("P256 ECDSA Failed to create signature: \(error)")
             return false
         }
-        
-        isValid = publicKey.isValidSignature(signature, for: msg.data(using: .utf8)!)
+        let msgData = msg.data(using: .utf8)
+        SHA256()
+        isValid = publicKey.isValidSignature(signature, for: msgData!)
         print("P256 ECDSA Signature is valid: \(isValid)")
         return isValid
     }
     
     func verify384(pubKeyBase64: String, signatureBase64: String, msg: String) -> Bool {
         var isValid = false
-        guard let pubData = Data(base64Encoded: pubKeyBase64), let signatureData = Data(base64Encoded: signatureBase64) else { return false }
+        guard let pubData = Data(base64Encoded: pubKeyBase64, options: .ignoreUnknownCharacters), let signatureData = Data(base64Encoded: signatureBase64, options: .ignoreUnknownCharacters) else { return false }
         
         let publicKey: P384.Signing.PublicKey
         do {
-            publicKey = try P384.Signing.PublicKey(rawRepresentation: pubData)
+            if #available(iOS 14.0, *) {
+                publicKey = try P384.Signing.PublicKey(derRepresentation: pubData)
+            } else {
+                // Fallback on earlier versions
+                publicKey = try P384.Signing.PublicKey(rawRepresentation: pubData)
+            }
         } catch {
             print("P384 ECDSA Failed to create public key: \(error)")
             return false
@@ -70,12 +81,16 @@ public extension EncryptProtocol {
     
     func verify521(pubKeyBase64: String, signatureBase64: String, msg: String) -> Bool {
         var isValid = false
-        guard let pubData = Data(base64Encoded: pubKeyBase64), let signatureData = Data(base64Encoded: signatureBase64) else { return false }
+        guard let pubData = Data(base64Encoded: pubKeyBase64, options: .ignoreUnknownCharacters), let signatureData = Data(base64Encoded: signatureBase64, options: .ignoreUnknownCharacters) else { return false }
         
         let publicKey: P521.Signing.PublicKey
         do {
-            publicKey = try P521.Signing.PublicKey(rawRepresentation: pubData)
-        } catch {
+            if #available(iOS 14.0, *) {
+                publicKey = try P521.Signing.PublicKey(derRepresentation: pubData)
+            } else {
+                // Fallback on earlier versions
+                publicKey = try P521.Signing.PublicKey(rawRepresentation: pubData)
+            }        } catch {
             print("P521 ECDSA Failed to create public key: \(error)")
             return false
         }
