@@ -18,16 +18,21 @@ public extension EncryptProtocol {
     
     func verify256(pubKeyBase64: String, signatureBase64: String, msg: String) -> Bool {
         var isValid = false
-        guard let pubData = Data(base64Encoded: pubKeyBase64, options: .ignoreUnknownCharacters), let signatureData = Data(base64Encoded: signatureBase64, options: .ignoreUnknownCharacters) else { return false }
-        
+        guard let pubData = Data(base64Encoded: pubKeyBase64, options: .ignoreUnknownCharacters), 
+                let signatureData = Data(base64Encoded: signatureBase64, options: .ignoreUnknownCharacters) else { return false }
+//        pubData.map { print($0) }
         let publicKey: P256.Signing.PublicKey
         do {
-            if #available(iOS 14.0, *) {
-                publicKey = try P256.Signing.PublicKey(derRepresentation: pubData)
-            } else {
-                // Fallback on earlier versions
-                publicKey = try P256.Signing.PublicKey(rawRepresentation: pubData)
-            }
+//            if #available(iOS 14.0, *) {
+//                publicKey = try P256.Signing.PublicKey(derRepresentation: pubData)
+//            } else {
+//                // Fallback on earlier versions
+//                publicKey = try P256.Signing.PublicKey(rawRepresentation: pubData)
+//            }
+//            publicKey = try P256.Signing.PublicKey(rawRepresentation: pubData)
+//            publicKey = try P256.Signing.PublicKey(compactRepresentation: pubData)
+            publicKey = try P256.Signing.PublicKey(x963Representation: pubData)
+//            publicKey = try P256.Signing.PublicKey(derRepresentation: pubData)
         } catch {
             print("P256 ECDSA Failed to create public key: \(error)")
             return false
