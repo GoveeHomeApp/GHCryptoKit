@@ -42,7 +42,6 @@ public extension EncryptProtocol {
             return false
         }
         let msgData = msg.data(using: .utf8)
-        SHA256()
         isValid = publicKey.isValidSignature(signature, for: msgData!)
         print("P256 ECDSA Signature is valid: \(isValid)")
         return isValid
