@@ -16,9 +16,9 @@ class ViewController: UIViewController {
 //        let pubKey = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEuy7mpu9PSCKGgHtXH/QDyqYAYHBu/19p9pD3BlxYWeLfLT/IKJZ0YKHZ4cH3kYBkOUW7J0R1zjoRZrg+lGvFsg==";
 //        let signa = "MEUCIHnTcyPCXJMNClH5Ri2BhL+X386OQhFwI8+pwpC+dHcXAiEA8hh0unw61wuyM7QuQFouKpKSgMUnXsQpQdzz2pEW6ME=";
 //        let msg = "d8af87b4d9a287eac30c480950c21f8d69f7b8e890b5ac5e259819a3a4bdd6f46f15fbf18ad43166d2448a7f298705a4e3c2f73b97c319eb9ac50df5ba668490"
-        let pubKey = "BN5EPBA2516a5BbgfEiOmD5tjNUQhP/4SXnqhBwFl0or/OC50Qd5WKoCZvI9Rxx0xgUILnCFgom4+GTN/lGlVbM=";
-        let signa = "MEUCIHNL7c4YzwI06ij5oUilTg+r/UxYfr6bfZuBFuRiyMW0AiEAid8nItrJTrjQ94yZ+ojquA/a0me04J5To9B/+crNmFU=";
-        let msg = "d8af87b4d9a287eac30c480950c21f8d69f7b8e890b5ac5e259819a3a4bdd6f46f15fbf18ad43166d2448a7f298705a4e3c2f73b97c319eb9ac50df5ba668490"
+        let pubKey = "BGM2hJ7CFNmq6hQgkAKEvzPg6kNCMYZuc7zuChi6Fst9g4FgeIUUra/NTUfr2z7Qdy86lYDBO9lmAjEXzvWw+bE=";
+        let signa = "MEYCIQCnNVrCmDm2v3vBuxUJTJU2Rrb7j0aLv8jbjo8U3cOkJgIhAKB8JmpRD+/rbN7Dj90ckzfz5B/PiSnwHBJk1TQ2et1h";
+        let msg = "ec6a5afeb18e802826c0d57c0fcfcc1596077d48237f9f78c85591893637694f852c12aafc0435cad08faada643a7673640fa3db9dc591634e2bb5f8ea808b98"
         
         let isValid1 = GHCryptoKitManager.instance.verifyP256_ECDSA(pubKeyBase64: pubKey, signatureBase64: signa, msg: msg)
         let isValid2 = GHCryptoKitManager.instance.verifyP384_ECDSA(pubKeyBase64: pubKey, signatureBase64: signa, msg: msg)
