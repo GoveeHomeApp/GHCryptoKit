@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = 'GHCryptoKit'
-  s.version      = '0.1.0'
+  s.version      = '0.0.0'
   s.summary      = 'GHCryptoKit.'
 
   s.homepage     = 'git@github.com:GoveeHomeApp/GHCryptoKit.git'
