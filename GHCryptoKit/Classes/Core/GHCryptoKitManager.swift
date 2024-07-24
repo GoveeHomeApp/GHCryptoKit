@@ -28,22 +28,32 @@ extension GHCryptoKitManager: EncryptProtocol {
     }
     
     ///  AES + RC4 single pack encrypt; params: data -> origin key -> secertKey position: sub position default is 16 default length is 20
-    @objc public func encryptBLEData(data: Data, _ key: Data? = nil) -> Data {
+    @objc public func encryptBLEData(data: Data, key: Data? = nil) -> Data {
         return gh_encryptData(data: data, key)
     }
-
+    @objc public func encryptBLEData(data: Data) -> Data {
+        return gh_encryptData(data: data, nil)
+    }
     ///  AES + RC4 single pack decrypt; params: data -> origin key -> secertKey position: sub position default is 16 default length is 20
-    @objc public func decryptBLEData(data: Data, _ key: Data? = nil) -> Data {
+    @objc public func decryptBLEData(data: Data, key: Data? = nil) -> Data {
         return gh_decryptData(data: data, key)
     }
-    
+    @objc public func decryptBLEData(data: Data) -> Data {
+        return gh_decryptData(data: data, nil)
+    }
     ///  AES + RC4 multi pack encrypt; params: data -> origin key -> secertKey position: sub position default is 16 default length is 20
-    @objc public func encryptBLEDataArray(dataArray: [Data], _ key: Data? = nil) -> [Data] {
+    @objc public func encryptBLEDataArray(dataArray: [Data], key: Data? = nil) -> [Data] {
         return gh_encryptDataArray(dataArray: dataArray, key)
     }
+    @objc public func encryptBLEDataArray(dataArray: [Data]) -> [Data] {
+        return gh_encryptDataArray(dataArray: dataArray, nil)
+    }
     ///  AES + RC4 multi pack decrypt; params: data -> origin key -> secertKey position: sub position default is 16 default length is 20
-    @objc public func decryptBLEDataArray(dataArray: [Data], _ key: Data? = nil) -> [Data] {
+    @objc public func decryptBLEDataArray(dataArray: [Data], key: Data? = nil) -> [Data] {
         return gh_decryptDataArray(dataArray: dataArray, key)
+    }
+    @objc public func decryptBLEDataArray(dataArray: [Data]) -> [Data] {
+        return gh_decryptDataArray(dataArray: dataArray, nil)
     }
     
 }

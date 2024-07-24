@@ -37,7 +37,7 @@ extension EncryptProtocol {
     
     func gh_encryptData(data: Data, _ key: Data? = nil, _ position: Int? = nil) -> Data {
         var defaultKey: Data = SymmetricalBiz.defaultKeyData()
-        var defaultPosition = data.count - data.count%16
+        let defaultPosition = data.count - (data.count%16)
         if let configKey = key { defaultKey = configKey }
         return SymmetricalBiz.gh_encryptData(data: data, key: defaultKey, position: defaultPosition)
     }
