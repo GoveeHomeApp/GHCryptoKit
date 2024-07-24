@@ -12,33 +12,33 @@ extension EncryptProtocol {
     
     func gh_decryptDataArray(dataArray: [Data], _ key: Data? = nil, _ position: Int? = nil) -> [Data] {
         var defaultKey: Data = SymmetricalBiz.defaultKeyData()
-        var defaultPosition = 16
         if let configKey = key { defaultKey = configKey }
-        if let pos = position { defaultPosition = pos }
-        return dataArray.map { SymmetricalBiz.gh_decryptData(data: $0, key: defaultKey, position: defaultPosition) }
+        return dataArray.map {
+            let defaultPosition = $0.count - ($0.count%16)
+            return SymmetricalBiz.gh_decryptData(data: $0, key: defaultKey, position: defaultPosition)
+        }
     }
     
     func gh_encryptDataArray(dataArray: [Data], _ key: Data? = nil, _ position: Int? = nil) -> [Data] {
         var defaultKey: Data = SymmetricalBiz.defaultKeyData()
-        var defaultPosition = 16
         if let configKey = key { defaultKey = configKey }
-        if let pos = position { defaultPosition = pos }
-        return dataArray.map { SymmetricalBiz.gh_encryptData(data: $0, key: defaultKey, position: defaultPosition) }
+        return dataArray.map {
+            let defaultPosition = $0.count - ($0.count%16)
+            return SymmetricalBiz.gh_encryptData(data: $0, key: defaultKey, position: defaultPosition)
+        }
     }
     
     func gh_decryptData(data: Data, _ key: Data? = nil, _ position: Int? = nil) -> Data {
         var defaultKey: Data = SymmetricalBiz.defaultKeyData()
-        var defaultPosition = 16
         if let configKey = key { defaultKey = configKey }
-        if let pos = position { defaultPosition = pos }
+        let defaultPosition = data.count - (data.count%16)
         return SymmetricalBiz.gh_decryptData(data: data, key: defaultKey, position: defaultPosition)
     }
     
     func gh_encryptData(data: Data, _ key: Data? = nil, _ position: Int? = nil) -> Data {
         var defaultKey: Data = SymmetricalBiz.defaultKeyData()
-        var defaultPosition = 16
+        var defaultPosition = data.count - data.count%16
         if let configKey = key { defaultKey = configKey }
-        if let pos = position { defaultPosition = pos }
         return SymmetricalBiz.gh_encryptData(data: data, key: defaultKey, position: defaultPosition)
     }
     
