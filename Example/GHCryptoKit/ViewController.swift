@@ -23,8 +23,29 @@ class ViewController: UIViewController {
         let isValid1 = GHCryptoKitManager.instance.verifyP256_ECDSA(pubKeyBase64: pubKey, signatureBase64: signa, msg: msg)
         let isValid2 = GHCryptoKitManager.instance.verifyP384_ECDSA(pubKeyBase64: pubKey, signatureBase64: signa, msg: msg)
         let isValid3 = GHCryptoKitManager.instance.verifyP521_ECDSA(pubKeyBase64: pubKey, signatureBase64: signa, msg: msg)
-        print("finish")
+        
+        /**
+         Printing description of data:
+         <e7010000 00000000 00000000 00000000 000000e6>
+         Printing description of key:
+         <4d616b69 6e674c69 6665536d 61727465>
+         Printing description of resultData:
+         <a070ef26 9debe4df eb8af6f7 e67e83a6 68ee40b9>
+         */
+        
+        let realData = Data([0xe7, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe6])
+        let result = GHCryptoKitManager.instance.encryptBLEData(data: realData)
+        print(self.dataToHex(result))
+        
+        let encryption = Data([0xa0, 0x70, 0xef, 0x26, 0x9d, 0xeb, 0xe4, 0xdf, 0xeb, 0x8a, 0xf6, 0xf7, 0xe6, 0x7e, 0x83, 0xa6, 0x68, 0xee, 0x40, 0xb9])
+        let deResult = GHCryptoKitManager.instance.decryptBLEData(data: encryption)
+        print(self.dataToHex(deResult))
+        
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    func dataToHex(_ data: Data) -> String {
+        return data.map { String(format: "%02hhx ", $0) }.joined()
     }
 
     override func didReceiveMemoryWarning() {

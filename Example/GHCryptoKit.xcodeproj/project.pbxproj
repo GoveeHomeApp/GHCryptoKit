@@ -40,7 +40,7 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		9E982DBCC482FFD98BAAF2B4 /* Pods_GHCryptoKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GHCryptoKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A24AD7DB77461C19E1609EFA /* GHCryptoKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = GHCryptoKit.podspec; path = ../GHCryptoKit.podspec; sourceTree = "<group>"; };
+		A24AD7DB77461C19E1609EFA /* GHCryptoKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = GHCryptoKit.podspec; path = ../GHCryptoKit.podspec; sourceTree = "<group>"; };
 		B86D65E47B9BCFAA76A98F62 /* Pods-GHCryptoKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GHCryptoKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-GHCryptoKit_Example/Pods-GHCryptoKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		D8DB054F66F6F4B31F8AE53D /* Pods-GHCryptoKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GHCryptoKit_Example.release.xcconfig"; path = "Target Support Files/Pods-GHCryptoKit_Example/Pods-GHCryptoKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
