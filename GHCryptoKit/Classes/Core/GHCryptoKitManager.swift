@@ -58,3 +58,27 @@ extension GHCryptoKitManager: EncryptProtocol {
     }
     
 }
+
+// MARK: Resources encrypt/decrypt padding
+extension GHCryptoKitManager {
+    
+    @objc public func decryptResource(encryptData: Data) -> Data? {
+        print("log.f ====== 开始资源解密流程 =======")
+        var result: Data? = nil
+        // 根据规则解出原始Data
+        let arr: [UInt8] = encryptData.bytesArray
+        print("log.f 密文Data长度 \(arr.count)")
+        print("log.f ====== 解密数据准备 =======")
+        guard let segment = arr[check: 0] else { print("log.f ⚠️⚠️获取密文段数失败！！！");  return nil }
+        let versionCode = arr[check: 1] ?? 1 // 解不出来就默认初始版本
+        print("log.f 密文拆分段数 \(segment)")
+        print("log.f 密文规则版本 \(versionCode)")
+        // 段数(1byte)+版本(1byte)+[(序号(1byte)+长度(2byte)+密文块)]+向量长度(2byte)+IV
+        if let res = ResourceDataPadding.processingData(originArray: arr, version: versionCode, segment: Int(segment)) {
+            result = Data(res.resources)
+        }
+        print("log.f ====== 资源解密流程完成 =======")
+        return result
+    }
+    
+}
