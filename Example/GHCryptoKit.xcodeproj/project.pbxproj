@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		11D7B38B2C646485006E6F16 /* 20240723122454.jpg.enc in Resources */ = {isa = PBXBuildFile; fileRef = 11D7B38A2C646485006E6F16 /* 20240723122454.jpg.enc */; };
+		11D7B3992C64D364006E6F16 /* test-enc.gif.enc in Resources */ = {isa = PBXBuildFile; fileRef = 11D7B3982C64D364006E6F16 /* test-enc.gif.enc */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		11D7B38A2C646485006E6F16 /* 20240723122454.jpg.enc */ = {isa = PBXFileReference; lastKnownFileType = file; name = 20240723122454.jpg.enc; path = ../../20240723122454.jpg.enc; sourceTree = "<group>"; };
+		11D7B3982C64D364006E6F16 /* test-enc.gif.enc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "test-enc.gif.enc"; sourceTree = "<group>"; };
 		3700FA580DB0F0B5CC4A7A8D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		3A9D4FA780913924C9E18AD6 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* GHCryptoKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GHCryptoKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -42,7 +44,7 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		9E982DBCC482FFD98BAAF2B4 /* Pods_GHCryptoKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GHCryptoKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A24AD7DB77461C19E1609EFA /* GHCryptoKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = GHCryptoKit.podspec; path = ../GHCryptoKit.podspec; sourceTree = "<group>"; };
+		A24AD7DB77461C19E1609EFA /* GHCryptoKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = GHCryptoKit.podspec; path = ../GHCryptoKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B86D65E47B9BCFAA76A98F62 /* Pods-GHCryptoKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GHCryptoKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-GHCryptoKit_Example/Pods-GHCryptoKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		D8DB054F66F6F4B31F8AE53D /* Pods-GHCryptoKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GHCryptoKit_Example.release.xcconfig"; path = "Target Support Files/Pods-GHCryptoKit_Example/Pods-GHCryptoKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,6 +100,7 @@
 		607FACD21AFB9204008FA782 /* Example for GHCryptoKit */ = {
 			isa = PBXGroup;
 			children = (
+				11D7B3982C64D364006E6F16 /* test-enc.gif.enc */,
 				11D7B38A2C646485006E6F16 /* 20240723122454.jpg.enc */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
@@ -245,6 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
+				11D7B3992C64D364006E6F16 /* test-enc.gif.enc in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 				11D7B38B2C646485006E6F16 /* 20240723122454.jpg.enc in Resources */,

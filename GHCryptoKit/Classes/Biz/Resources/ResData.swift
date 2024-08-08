@@ -40,9 +40,10 @@ class ResourceDataPadding {
     private static func parseAll(_ data: [UInt8], segment: Int) -> ([UInt8]?, [UInt8]?, [UInt8]?) {
         var index = 0
         var currentSegment: Int = 1
+        var resultDict: [Int: [UInt8]] = [:]
         var resultKey: [UInt8] = []
         // 转译密钥
-        while currentSegment < segment {
+        while resultDict.count < segment {
             // 读取序号
             guard let seg = data.safe(index..<index+1) else { break }
             currentSegment = Int(seg[0])
@@ -59,10 +60,11 @@ class ResourceDataPadding {
             guard let actualData = data.safe(index..<index+Int(length)) else { break }
             print("log.f 当前组号数据 \(actualData)")
             // 将实际数据添加到结果数组中
-            resultKey.append(contentsOf: actualData)
+            resultDict[currentSegment] = actualData
             // 跳到下一个数据块
             index += Int(length)
         }
+        resultKey = resultDict.sorted { $0.key < $1.key }.flatMap { $0.value }
         print("log.f 已处理完密钥，当前index \(index)")
         print("log.f 当前密钥 \(resultKey)")
         print("log.f 当前密钥长度 \(resultKey.count)")

@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // 加载本地加密数据
-        if let filePath = Bundle.main.path(forResource: "20240723122454.jpg", ofType: "enc") {
+        if let filePath = Bundle.main.path(forResource: "test-enc.gif", ofType: "enc") {
             if let fileData = try? Data(contentsOf: URL(fileURLWithPath: filePath)) {
                 if let res = GHCryptoKitManager.instance.decryptResource(encryptData: fileData) {
                     
