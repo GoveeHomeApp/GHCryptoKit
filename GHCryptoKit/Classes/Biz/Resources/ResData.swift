@@ -72,7 +72,7 @@ class ResourceDataPadding {
         guard let ivlengthBytes = remainArray.safe(0..<2) else { return (nil, nil, nil) }
         let ivlength = UInt16(SmallEndBytes(ivlengthBytes[1], ivlengthBytes[0]))
         print("log.f 当前向量长度 \(Int(ivlength))")
-        guard let ivData = data.safe(0..<Int(ivlength)) else { return (nil, nil, nil) }
+        guard let ivData = remainArray.safe(2..<Int(ivlength)+2) else { return (nil, nil, nil) }
         print("log.f 当前向量数据 \(ivData)")
         let realLength = Int(ivlength) + 2
         let secDataArray = Array(remainArray.dropFirst(realLength))
