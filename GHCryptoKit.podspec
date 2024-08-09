@@ -11,6 +11,7 @@ Pod::Spec.new do |s|
   s.author       = 'sy'
 
   s.ios.deployment_target = '13.0'
+  s.watchos.deployment_target = '3.0'
 
   s.swift_version = '5.0'
 
