@@ -17,43 +17,40 @@ public struct RC4 {
     }
 
     static func processData(data: Data, key: Data) -> Data {
-        var s = [UInt8](repeating: 0, count: 256)
-        var temp: UInt8
-        // 初始化S-box
+        let keyLength = key.count
+        let textLength = data.count
+        var S = [UInt8](repeating: 0, count: 256)
         for i in 0..<256 {
-            s[i] = UInt8(i)
+            S[i] = UInt8(i)
         }
+        var temp: UInt8
         // 根据密钥初始化S-box
         var i = 0
         var j = 0
-        let keyLength = key.count
         for _ in 0..<256 {
-            j = (j + Int(s[i]) + Int(key[key.startIndex.advanced(by: i % keyLength)])) % 256
-            temp = s[i]
-            s[i] = s[j]
-            s[j] = temp
+            j = (j + Int(S[i]) + Int(key[key.startIndex.advanced(by: i % keyLength)])) % 256
+            temp = S[i]
+            S[i] = S[j]
+            S[j] = temp
             i += 1
         }
-        // 生成密钥流并异或
-        var output = Data(count: data.count)
-        i = 0
-        j = 0        
-        data.withUnsafeBytes { dataBytes in
-            output.withUnsafeMutableBytes { outputBytes in
-                // 确保 dataBytes 和 outputBytes 是 UnsafeBufferPointer 类型
-                let bytes = dataBytes.bindMemory(to: UInt8.self)
-                let mutableBytes = outputBytes.bindMemory(to: UInt8.self)
-                // 遍历数据并执行你的处理逻辑
-                for k in 0..<data.count {
-                    i = (i + 1) % 256
-                    j = (j + Int(s[i])) % 256
-                    // s数组密钥流
-                    let keyStreamByte = s[(Int(s[i]) + Int(s[j])) % 256]
-                    // 使用异或操作处理字节
-                    mutableBytes[k] ^= bytes[k] ^ keyStreamByte
-                }
-            }
+        // Encryption/Decryption
+        var outBytes = [UInt8](repeating: 0, count: textLength)
+
+        // Initialize k and l
+        var k = 0
+        var l = 0
+        for t in 0..<textLength {
+            k = (k + 1) % 256
+            l = (l + Int(S[k])) % 256
+            // Swap S[k] with S[l]
+            let temp = S[k]
+            S[k] = S[l]
+            S[l] = temp
+            let idx: Int = (Int(S[k]) + Int(S[l])) % 256
+            let K = S[idx]
+            outBytes[t] = data[t] ^ K
         }
-        return output
+        return Data(outBytes)
     }
 }
